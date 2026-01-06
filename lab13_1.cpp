@@ -3,7 +3,7 @@
 #include <cmath>
 using namespace std;
 
-void stat(const double[],int,double[]);
+void stat(const double data[],int size,double b[]);
 
 int main(){
     double A[] = {1.2,3.5,6.9,7.8,12.5,0.5};
@@ -18,4 +18,34 @@ int main(){
     cout << "Max = " << B[4] << endl;
     cout << "Min = " << B[5];
     return 0;
+}
+
+void stat(const double data[],int size,double ans[]){
+    double sum = 0;
+    for (int i = 0 ; i<size ; i++) sum = sum + data[i];
+
+    double mean = sum/size;
+    ans[0]=mean;
+    double sig = 0 , kun = 1 , zuan = 0 , max = data[0] , min =data[0];
+
+    for (int i = 0 ; i<size ; i++){
+        sig= sig + pow(data[i]-mean,2);
+        kun= kun * data[i];
+        zuan= zuan + 1/data[i];
+        if (data[i]>max)
+        {
+            max=data[i];
+        }
+        if (data[i]<min)
+        {
+            min=data[i];
+        }
+
+    }
+
+    ans[1] = sqrt(sig/(size));
+    ans[2] = pow(kun,1.0/size);
+    ans[3] = size/zuan;
+    ans[4] = max;
+    ans[5] = min;
 }
